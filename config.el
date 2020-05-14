@@ -45,55 +45,8 @@
 
 ;; Anish's Configuration ;;
 
-(setq doom-localleader-key ",")
+(load "~/.doom.d/keybindings.el")
 (setq display-line-numbers-type 'relative)
-
-(map! :leader
-      :desc "M-x" "SPC" #'counsel-M-x
-      :desc "Find file in project" ":" #'+ivy/projectile-find-file)
-
-(map! :map evil-window-map
-      ;; Unbind "p" so that it can be used as a prefix
-      "p" nil
-      :prefix ("p" . "purpose")
-      :desc "purpose-load-layout" "l" #'purpose-load-layout
-      :desc "purpose-save-layout" "s" #'purpose-save-layout)
-
-(defvar doom-help-prefix-map (make-sparse-keymap))
-(define-key! doom-help-prefix-map
-  "c" #'doom/help-package-config
-  "d" #'doom/goto-private-packages-file
-  "h" #'doom/help-package-homepage
-  "p" #'doom/help-packages)
-
-(defvar doom-help-map (make-sparse-keymap))
-(define-key! doom-help-map
-  "b" #'doom/report-bug
-  "c" #'doom/goto-private-config-file
-  "d" #'doom/toggle-debug-mode
-  "f" #'doom/help-faq
-  "h" #'doom/help
-  "l" #'doom/help-search-load-path
-  "m" #'doom/help-modules
-  "n" #'doom/help-news
-  "s" #'doom/help-search-headings
-  "t" #'doom/toggle-profiler
-  "v" #'doom/help-autodefs
-  "v" #'doom/version
-  "x" #'doom/sandbox
-  "C" #'doom/goto-private-init-file
-  "L" #'doom/help-search-loaded-files
-  "N" #'doom/help-news-search
-  "S" #'doom/help-search
-  "p" doom-help-prefix-map)
-
-;; (define-key! help-map
-;;   "D" doom-help-map)
-
-(map! (:map doom-help-map
-       :desc "prefix" "p" doom-help-prefix-map)
-      (:map help-map
-       :desc "Doom" "D" doom-help-map))
 
 (use-package company
   :custom
