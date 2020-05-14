@@ -45,3 +45,10 @@
 ;; This is required for some packages whose default branch isn't 'master' (which
 ;; our package manager can't deal with; see raxod502/straight.el#279)
 ;(package! builtin-package :recipe (:branch "develop"))
+
+(package! window-purpose
+  :recipe (:type git :host github :repo "bmag/emacs-purpose"))
+
+;; TODO The git repo is now located @ https://depp.brause.cc/shackle/
+(package! shackle
+  :recipe (:type git :host github :repo "wasamasa/shackle"))
