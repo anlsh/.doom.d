@@ -76,13 +76,6 @@
   :custom (coq-compile-before-require t)
   :config (load "~/.emacs.d/private/proof-general/generic/proof-site"))
 
-;;(use-package hungry-delete
-;;  :after smartparens
-;;  :config
-;;  (global-hungry-delete-mode)
-;;  (add-hook 'smartparens-enabled-hook (lambda () (hungry-delete-mode 1)))
-;;  :diminish hungry-delete-mode)
-
 (use-package magit
   :custom
   (magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
@@ -106,18 +99,23 @@
   (shackle-mode))
 
 (use-package sly
-  :init (load (expand-file-name "~/.roswell/helper.el"))
+  :init
+  (load (expand-file-name "~/.roswell/helper.el"))
+  (add-hook 'lisp-mode-hook (lambda () (setq fill-column 100)))
+
   :custom
   (inferior-lisp-program "ros -Q run")
   (sly-complete-symbol-function 'sly-flex-completions)
   (sly-compile-file-options '(:fasl-directory "/tmp/"))
+
   :config
   ;; I don't like popups, which Doom puts sly into by default
-  ;; See ~/.emacs.d/modules/lang/common-lisp/config.el for the list of things to override
+  ;; See ~/.emacs.d/modules/lang/common-lisp/config.el for the list of things to
+  ;; override
   (set-popup-rules!
-   (mapcar (lambda (regex) (list regex :ignore t))
-           '("^\\*sly-mrepl" "^\\*sly-compilation" "^\\*sly-traces"
-             "^\\*sly-description" "^\\*sly-\\(?:db\\|inspector\\)"))))
+    (mapcar (lambda (regex) (list regex :ignore t))
+            '("^\\*sly-mrepl" "^\\*sly-compilation" "^\\*sly-traces"
+              "^\\*sly-description" "^\\*sly-\\(?:db\\|inspector\\)"))))
 
 
 (use-package whitespace
@@ -142,7 +140,7 @@
   (purpose-compile-user-configuration))
 
 (use-package yasnippet
-  :custom (yas-snippet-dirs '("~/.spacemacs.d/snippets/")))
+  :custom (yas-snippet-dirs '("~/.doom.d/snippets/")))
 
 (use-package erc
   ;; Sourced from
