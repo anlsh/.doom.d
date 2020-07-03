@@ -106,7 +106,18 @@
   (shackle-mode))
 
 (use-package sly
-  :custom (inferior-lisp-program "/usr/bin/sbcl"))
+  :init (load (expand-file-name "~/.roswell/helper.el"))
+  :custom
+  (inferior-lisp-program "ros -Q run")
+  (sly-complete-symbol-function 'sly-flex-completions)
+  (sly-compile-file-options '(:fasl-directory "/tmp/"))
+  :config
+  ;; I don't like popups, which Doom puts sly into by default
+  ;; See ~/.emacs.d/modules/lang/common-lisp/config.el for the list of things to override
+  (set-popup-rules!
+   (mapcar (lambda (regex) (list regex :ignore t))
+           '("^\\*sly-mrepl" "^\\*sly-compilation" "^\\*sly-traces"
+             "^\\*sly-description" "^\\*sly-\\(?:db\\|inspector\\)"))))
 
 
 (use-package whitespace
