@@ -10,8 +10,10 @@
       ;; Unbind "p" so that it can be used as a prefix
       "p" nil
       :prefix ("p" . "purpose")
-      :desc "purpose-load-layout" "l" #'purpose-load-layout
-      :desc "purpose-save-layout" "s" #'purpose-save-layout)
+      "r" #'purpose-reset-window-layout
+      "l" #'purpose-load-window-layout
+      :desc "set window purpose" "s" #'purpose-set-window-purpose
+      "R" #'purpose-save-window-layout)
 
 (defvar doom-help-prefix-map (make-sparse-keymap))
 (define-key! doom-help-prefix-map

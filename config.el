@@ -127,7 +127,7 @@
 
 (use-package! window-purpose
   :custom
-  (purpose-layout-dirs '("~/.spacemacs.d/layouts/"))
+  (purpose-layout-dirs '("~/.doom.d/layouts/"))
   ;; Although the package suggests using add-to-list, default value is nil
   (purpose-mode-user-purposes '((lisp-mode . cl-src)
                                 (sldb-mode . cl-repl)
