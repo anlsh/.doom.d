@@ -100,11 +100,10 @@
 
 (use-package sly
   :init
-  (load (expand-file-name "~/.roswell/helper.el"))
   (add-hook 'lisp-mode-hook (lambda () (setq fill-column 100)))
 
   :custom
-  (inferior-lisp-program "ros -Q run")
+  (inferior-lisp-program "sbcl")
   (sly-complete-symbol-function 'sly-flex-completions)
   (sly-compile-file-options '(:fasl-directory "/tmp/"))
 
