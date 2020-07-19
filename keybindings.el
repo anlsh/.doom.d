@@ -98,3 +98,7 @@
     "7" #'winum-select-window-7
     "8" #'winum-select-window-8
     "9" #'winum-select-window-9)
+
+(map! (:map sly-mrepl-mode-map
+       "C-up" #'sly-mrepl-previous-input-or-button
+       "C-down" #'sly-mrepl-next-input-or-button))
