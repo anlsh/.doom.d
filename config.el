@@ -48,6 +48,8 @@
 (load "~/.doom.d/keybindings.el")
 (setq display-line-numbers-type 'relative)
 
+(global-display-fill-column-indicator-mode)
+
 (use-package company
   :custom
   (company-begin-commands '(self-insert-command))
