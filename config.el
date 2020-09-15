@@ -49,6 +49,8 @@
 (setq display-line-numbers-type 'relative)
 
 (global-display-fill-column-indicator-mode)
+;; Maximize GUI on startup
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 (use-package company
   :custom
