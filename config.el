@@ -46,7 +46,10 @@
 ;; Anish's Configuration ;;
 
 (load "~/.doom.d/keybindings.el")
+
 (setq display-line-numbers-type 'relative)
+;; Enable narrow-to-region by default
+(put 'narrow-to-region 'disabled nil)
 
 (global-display-fill-column-indicator-mode)
 ;; Maximize GUI on startup
