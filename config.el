@@ -83,6 +83,26 @@
   :custom (coq-compile-before-require t)
   :config (load "~/.emacs.d/private/proof-general/generic/proof-site"))
 
+(use-package counsel-projectile
+  :config
+  (labels
+      ;; Make counsel-projectile-switch-project open a dired buffer instead
+      ;; of immediately asking you to open a file in the project
+      ;; https://github.com/
+      ;;     ericdanan/counsel-projectile/issues/58#issuecomment-387752675
+      ((open-dired-in-counsel-projectile (project)
+            "Open ‘dired’ at the root of the project."
+            (let ((projectile-switch-project-action
+                   (lambda ()
+                     (projectile-dired))))
+              (counsel-projectile-switch-project-by-name project))))
+
+    (counsel-projectile-modify-action
+     'counsel-projectile-switch-project-action
+     `((add ("." ,#'open-dired-in-counsel-projectile
+             "open ‘dired’ at the root of the project")
+            1)))))
+
 (use-package magit
   :custom
   (magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
