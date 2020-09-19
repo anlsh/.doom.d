@@ -143,9 +143,9 @@
             '("^\\*sly-mrepl" "^\\*sly-compilation" "^\\*sly-traces"
               "^\\*sly-description" "^\\*sly-\\(?:db\\|inspector\\)"))))
 
-
 (use-package whitespace
   :hook (before-save . delete-trailing-whitespace)
+  :custom (whitespace-global-modes '(not magit-log-mode))
   :config (global-whitespace-mode))
 
 
