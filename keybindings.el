@@ -43,9 +43,6 @@
   "S" #'doom/help-search
   "p" doom-help-prefix-map)
 
-;; (define-key! help-map
-;;   "D" doom-help-map)
-
 (map! (:map doom-help-map
        :desc "prefix" "p" doom-help-prefix-map)
       (:map help-map
