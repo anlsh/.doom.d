@@ -52,3 +52,5 @@
 ;; TODO The git repo is now located @ https://depp.brause.cc/shackle/
 (package! shackle
   :recipe (:type git :host github :repo "wasamasa/shackle"))
+
+(package! evil-cleverparens)
