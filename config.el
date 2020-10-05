@@ -45,6 +45,9 @@
 
 ;; Anish's Configuration ;;
 
+;; Look idk what vc even does but it slows down tramp and causes errors in
+;; magit forge https://github.com/magit/magit/issues/1274 so it's gone fs
+(setq vc-handled-backends nil)
 (setq auth-sources '("~/.authinfo.gpg"))
 ;; Relative line numbers, but I still never use them lol
 (setq display-line-numbers-type 'relative)
@@ -60,6 +63,11 @@
 (add-hook 'lisp-mode-hook (lambda () (run-hooks 'lispy-mode-hook)))
 (add-hook 'emacs-lisp-mode-hook (lambda () (run-hooks 'lispy-mode-hook)))
 (add-hook 'lispy-mode-hook (lambda () (setq fill-column 100)))
+
+(defadvice projectile-project-root (around ignore-remote first activate)
+  (unless (file-remote-p default-directory) ad-do-it))
+
+(load "~/.doom.d/keybindings.el")
 
 (use-package company
   :custom
@@ -77,17 +85,17 @@
          ("RET" . nil)
          ("<return>" . nil))
   :config
-  (global-company-mode))
+  (global-company-mode)
 
-(use-package company-quickhelp
-  :defer t
-  :custom (company-quickhelp-delay 0))
+  (use-package company-quickhelp
+    :defer t
+    :custom (company-quickhelp-delay 0))
 
-;; I don't actually use coq these days, but wth
-(use-package company-coq
-  :defer t
-  :custom (coq-compile-before-require t)
-  :config (load "~/.emacs.d/private/proof-general/generic/proof-site"))
+  ;; I don't actually use coq these days, but wth
+  (use-package company-coq
+    :defer t
+    :custom (coq-compile-before-require t)
+    :config (load "~/.emacs.d/private/proof-general/generic/proof-site")))
 
 (use-package counsel-projectile
   :config
@@ -113,6 +121,9 @@
   :after smartparens
   :hook (lispy-mode . evil-cleverparens-mode))
 
+(use-package hungry-delete
+  :config (global-hungry-delete-mode))
+
 (use-package magit
   :custom
   (magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
@@ -120,9 +131,8 @@
   (git-rebase-confirm-cancel nil))
 
 (use-package org
-  :init
-  (setq  org-directory '("~/org/"))
   :custom
+  (org-directory '("~/org"))
   (org-agenda-window-setup 'only-window))
 
 (use-package python
@@ -186,8 +196,3 @@
   "Copy entire buffer to clipboard"
   (interactive)
   (clipboard-kill-ring-save (point-min) (point-max)))
-
-(load "~/.doom.d/keybindings.el")
-
-(defadvice projectile-project-root (around ignore-remote first activate)
-  (unless (file-remote-p default-directory) ad-do-it))

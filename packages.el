@@ -54,3 +54,5 @@
   :recipe (:type git :host github :repo "wasamasa/shackle"))
 
 (package! evil-cleverparens)
+(package! git-link)
+(package! hungry-delete)
