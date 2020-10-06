@@ -56,3 +56,5 @@
 (package! evil-cleverparens)
 (package! git-link)
 (package! hungry-delete)
+(package! projectile-rsync
+  :recipe (:host github :repo "anlsh/projectile-rsync"))

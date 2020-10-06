@@ -122,6 +122,7 @@
   :hook (lispy-mode . evil-cleverparens-mode))
 
 (use-package hungry-delete
+  :custom (hungry-delete-join-reluctantly t)
   :config (global-hungry-delete-mode))
 
 (use-package magit
@@ -134,6 +135,10 @@
   :custom
   (org-directory '("~/org"))
   (org-agenda-window-setup 'only-window))
+
+(use-package projectile-rsync
+  :custom
+  (rsync-command-base "rsync -CavP"))
 
 (use-package python
   :custom
