@@ -77,13 +77,6 @@
 (map! (:map doom-leader-search-map
        :desc "iedt-mode" "e" #'iedit-mode))
 
-(map! (:map lispy-mode-map
-       "[" #'lispy-open-square
-       "]" #'lispy-close-square))
-
-;; Yank whole buffer somehow
-;; (map! (:map doom-leader-buffer-map))
-
 (map! :leader
     "0" #'winum-select-window-0-or-10
     "1" #'winum-select-window-1
