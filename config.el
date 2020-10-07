@@ -168,6 +168,9 @@
 (use-package smartparens
    :hook (lispy-mode . turn-on-smartparens-strict-mode))
 
+(use-package vterm
+  :hook (vterm-mode . (lambda () (setq show-trailing-whitespace nil))))
+
 (use-package whitespace
   :hook (before-save . delete-trailing-whitespace)
   :custom (whitespace-global-modes '(not magit-log-mode))
