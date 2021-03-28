@@ -24,7 +24,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-Iosvkem)
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
@@ -57,12 +57,16 @@
 (global-display-fill-column-indicator-mode)
 ;; Maximize GUI on startup
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
+
 ;; Create a hook for lispy modes (emacs lisp, CL, clojure, etc)
-;; CAREFUL: this conflicts with an actual mode provided by the lispy package
-(defvar lispy-mode-hook)
-(add-hook 'lisp-mode-hook (lambda () (run-hooks 'lispy-mode-hook)))
-(add-hook 'emacs-lisp-mode-hook (lambda () (run-hooks 'lispy-mode-hook)))
-(add-hook 'lispy-mode-hook (lambda () (setq fill-column 100)))
+;; lispy-mode-hook is an actual thing, so we just use "lispy-hook"
+(defvar lispy-hook)
+(add-hook 'lisp-mode-hook (lambda () (run-hooks 'lispy-hook)))
+(add-hook 'emacs-lisp-mode-hook (lambda () (run-hooks 'lispy-hook)))
+(add-hook 'sly-mrepl-mode-hook (lambda () (run-hooks 'lispy-hook)))
+(add-hook 'lispy-hook (lambda () (setq fill-column 100)))
+(add-hook 'lispy-hook #'hungry-delete-mode)
+(add-hook 'lispy-hook #'aggressive-indent-mode)
 
 (defadvice projectile-project-root (around ignore-remote first activate)
   (unless (file-remote-p default-directory) ad-do-it))
@@ -122,8 +126,7 @@
   :hook (lispy-mode . evil-cleverparens-mode))
 
 (use-package hungry-delete
-  :custom (hungry-delete-join-reluctantly t)
-  :config (global-hungry-delete-mode))
+  :custom (hungry-delete-join-reluctantly t))
 
 (use-package magit
   :custom
@@ -133,7 +136,7 @@
 
 (use-package org
   :custom
-  (org-directory '("~/org"))
+  (org-directory "~/.org")
   (org-agenda-window-setup 'only-window))
 
 (use-package projectile-rsync

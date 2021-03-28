@@ -53,8 +53,12 @@
 (package! shackle
   :recipe (:type git :host github :repo "wasamasa/shackle"))
 
+(package! iedit)
+(package! aggressive-indent)
+
 (package! evil-cleverparens)
 (package! git-link)
 (package! hungry-delete)
 (package! projectile-rsync
   :recipe (:host github :repo "anlsh/projectile-rsync"))
+(package! protobuf-mode)
