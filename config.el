@@ -200,10 +200,6 @@
   :custom (yas-snippet-dirs '("~/.doom.d/snippets/")))
 
 (defun copy-whole-buffer-to-clipboard ()
-  ;; Stolen from spacemacs
-  ;; https://github.com/syl20bnr/spacemacs/blob/
-  ;; c7a103a772d808101d7635ec10f292ab9202d9ee/layers/%2Bdistributions/
-  ;; spacemacs-base/funcs.el#L715-L718
   "Copy entire buffer to clipboard"
   (interactive)
   (clipboard-kill-ring-save (point-min) (point-max)))
