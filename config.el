@@ -67,6 +67,8 @@
 (add-hook 'lispy-hook (lambda () (setq fill-column 100)))
 (add-hook 'lispy-hook #'hungry-delete-mode)
 (add-hook 'lispy-hook #'aggressive-indent-mode)
+(add-hook 'lispy-hook #'smartparens-strict-mode)
+(add-hook 'lispy-hook #'evil-cleverparens-mode)
 
 (defadvice projectile-project-root (around ignore-remote first activate)
   (unless (file-remote-p default-directory) ad-do-it))
@@ -128,6 +130,22 @@
 (use-package hungry-delete
   :custom (hungry-delete-join-reluctantly t))
 
+(use-package leetcode
+  :custom (leetcode-prefer-tag-display nil))
+
+;; Prefer clangd as C++ Language Server
+(use-package lsp-clangd
+  :custom
+  (lsp-clients-clangd-args
+   '("-j=4"
+     "--background-index"
+     "--clang-tidy"
+     "--completion-style=detailed"
+     "--header-insertion=never"
+     "--header-insertion-decorators=0"))
+  :config
+  (set-lsp-priority! 'clangd 2))
+
 (use-package magit
   :custom
   (magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
@@ -174,10 +192,8 @@
 (use-package vterm
   :hook (vterm-mode . (lambda () (setq show-trailing-whitespace nil))))
 
-(use-package whitespace
-  :hook (before-save . delete-trailing-whitespace)
-  :custom (whitespace-global-modes '(not magit-log-mode))
-  :config (global-whitespace-mode))
+(use-package ws-butler
+  :config (ws-butler-global-mode))
 
 
 (use-package! window-purpose
