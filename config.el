@@ -219,3 +219,12 @@
   "Copy entire buffer to clipboard"
   (interactive)
   (clipboard-kill-ring-save (point-min) (point-max)))
+
+(defun load-local-file (filename)
+  "Loads ~/.doom.d.local/filename if the file exists"
+  (let ((full-name (concat (file-name-as-directory "~/.doom.d.local/")
+                           filename)))
+    (when (file-exists-p full-name)
+      (load full-name))))
+
+(load-local-file "init.el")
