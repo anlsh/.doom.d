@@ -62,5 +62,4 @@
 (package! projectile-rsync
   :recipe (:host github :repo "anlsh/projectile-rsync"))
 (package! protobuf-mode)
-(package! leetcode)
 (package! ws-butler)

@@ -130,9 +130,6 @@
 (use-package hungry-delete
   :custom (hungry-delete-join-reluctantly t))
 
-(use-package leetcode
-  :custom (leetcode-prefer-tag-display nil))
-
 ;; Prefer clangd as C++ Language Server
 (use-package lsp-clangd
   :custom
