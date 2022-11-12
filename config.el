@@ -183,8 +183,12 @@
             '("^\\*sly-mrepl" "^\\*sly-compilation" "^\\*sly-traces"
               "^\\*sly-description" "^\\*sly-\\(?:db\\|inspector\\)"))))
 
+(use-package rust-mode
+  :config
+  (push "~/.cargo/bin/cargo" exec-path))
+
 (use-package smartparens
-   :hook (lispy-mode . turn-on-smartparens-strict-mode))
+  :hook (lispy-mode . turn-on-smartparens-strict-mode))
 
 (use-package vterm
   :hook (vterm-mode . (lambda () (setq show-trailing-whitespace nil))))
