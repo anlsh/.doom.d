@@ -170,7 +170,7 @@
 
 (use-package sly
   :custom
-  (inferior-lisp-program "sbcl")
+  (inferior-lisp-program "ros -Q run")
   (sly-complete-symbol-function 'sly-flex-completions)
   (sly-compile-file-options '(:fasl-directory "/tmp/"))
 
@@ -181,7 +181,8 @@
   (set-popup-rules!
     (mapcar (lambda (regex) (list regex :ignore t))
             '("^\\*sly-mrepl" "^\\*sly-compilation" "^\\*sly-traces"
-              "^\\*sly-description" "^\\*sly-\\(?:db\\|inspector\\)"))))
+              "^\\*sly-description" "^\\*sly-\\(?:db\\|inspector\\)")))
+  (load (expand-file-name "~/.roswell/helper.el")))
 
 (use-package rust-mode
   :config

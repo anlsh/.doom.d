@@ -78,24 +78,22 @@
        :desc "iedt-mode" "e" #'iedit-mode))
 
 (map! :leader
-    "0" #'winum-select-window-0-or-10
-    "1" #'winum-select-window-1
-    "2" #'winum-select-window-2
-    "3" #'winum-select-window-3
-    "4" #'winum-select-window-4
-    "5" #'winum-select-window-5
-    "6" #'winum-select-window-6
-    "7" #'winum-select-window-7
-    "8" #'winum-select-window-8
-    "9" #'winum-select-window-9)
+      "0" #'winum-select-window-0-or-10
+      "1" #'winum-select-window-1
+      "2" #'winum-select-window-2
+      "3" #'winum-select-window-3
+      "4" #'winum-select-window-4
+      "5" #'winum-select-window-5
+      "6" #'winum-select-window-6
+      "7" #'winum-select-window-7
+      "8" #'winum-select-window-8
+      "9" #'winum-select-window-9)
 
 (map! (:map sly-mrepl-mode-map
        "C-<up>" #'sly-mrepl-previous-input-or-button
        "C-<down>" #'sly-mrepl-next-input-or-button))
 
 (map! :leader
-    (:prefix-map ("b" . "buffer")
-     :desc "Copy whole buffer"    "y" #'copy-whole-buffer-to-clipboard))
+      (:prefix-map ("b" . "buffer")
+       :desc "Copy whole buffer"    "y" #'copy-whole-buffer-to-clipboard))
 
-(define-key! doom-leader-project-map
-  "]" #'rsync-project)
