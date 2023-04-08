@@ -96,4 +96,3 @@
 (map! :leader
       (:prefix-map ("b" . "buffer")
        :desc "Copy whole buffer"    "y" #'copy-whole-buffer-to-clipboard))
-

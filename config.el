@@ -65,7 +65,7 @@
 (add-hook 'emacs-lisp-mode-hook (lambda () (run-hooks 'lispy-hook)))
 (add-hook 'sly-mrepl-mode-hook (lambda () (run-hooks 'lispy-hook)))
 (add-hook 'lispy-hook (lambda () (setq fill-column 100)))
-(add-hook 'lispy-hook #'hungry-delete-mode)
+;; (add-hook 'lispy-hook #'hungry-delete-mode)
 (add-hook 'lispy-hook #'aggressive-indent-mode)
 (add-hook 'lispy-hook #'smartparens-strict-mode)
 (add-hook 'lispy-hook #'evil-cleverparens-mode)
@@ -105,23 +105,12 @@
 
 (use-package counsel-projectile
   :config
-  (cl-labels
-      ;; Make counsel-projectile-switch-project open a dired buffer instead
-      ;; of immediately asking you to open a file in the project
-      ;; https://github.com/
-      ;;     ericdanan/counsel-projectile/issues/58#issuecomment-387752675
-      ((open-dired-in-counsel-projectile (project)
-            "Open ‘dired’ at the root of the project."
-            (let ((projectile-switch-project-action
-                   (lambda ()
-                     (projectile-dired))))
-              (counsel-projectile-switch-project-by-name project))))
-
-    (counsel-projectile-modify-action
-     'counsel-projectile-switch-project-action
-     `((add ("." ,#'open-dired-in-counsel-projectile
-             "open ‘dired’ at the root of the project")
-            1)))))
+  ;; Make counsel-projectile-switch-project open a dired buffer instead
+  ;; of immediately asking you to open a file in the project
+  ;; https://github.com/ericdanan/counsel-projectile/issues/62#issuecomment-353732566
+  (counsel-projectile-modify-action
+   'counsel-projectile-switch-project-action
+   '((default counsel-projectile-switch-project-action-dired))))
 
 (use-package evil-cleverparens
   :after smartparens
@@ -154,10 +143,6 @@
   (org-directory "~/.org")
   (org-agenda-window-setup 'only-window))
 
-(use-package projectile-rsync
-  :custom
-  (rsync-command-base "rsync -CavP"))
-
 (use-package python
   :custom
   (python-indent-offset 4))
@@ -170,7 +155,7 @@
 
 (use-package sly
   :custom
-  (inferior-lisp-program "ros -Q run")
+  (inferior-lisp-program "sbcl")
   (sly-complete-symbol-function 'sly-flex-completions)
   (sly-compile-file-options '(:fasl-directory "/tmp/"))
 
@@ -181,12 +166,11 @@
   (set-popup-rules!
     (mapcar (lambda (regex) (list regex :ignore t))
             '("^\\*sly-mrepl" "^\\*sly-compilation" "^\\*sly-traces"
-              "^\\*sly-description" "^\\*sly-\\(?:db\\|inspector\\)")))
-  (load (expand-file-name "~/.roswell/helper.el")))
+              "^\\*sly-description" "^\\*sly-\\(?:db\\|inspector\\)"))))
 
-(use-package rust-mode
-  :config
-  (push "~/.cargo/bin/cargo" exec-path))
+;; (use-package rust-mode
+;;   :config
+;;   (push "~/.cargo/bin/cargo" exec-path))
 
 (use-package smartparens
   :hook (lispy-mode . turn-on-smartparens-strict-mode))
@@ -202,15 +186,8 @@
   :custom
   (purpose-layout-dirs '("~/.doom.d/layouts/"))
   ;; Although the package suggests using add-to-list, default value is nil
-  (purpose-mode-user-purposes '((lisp-mode . cl-src)
-                                (sldb-mode . cl-repl)
-                                (slime-repl-mode . cl-repl)
-                                (slime-inspector-mode . cl-general)))
-  (purpose-user-name-purposes '(("*inferior-lisp*" . cl-repl)
-                                ("*slime-repl sbcl*" . cl-repl)))
-  (purpose-user-regexp-purposes '(( "\*sldb.*" . cl-repl)
-                                  ("\*sly-db" . cl-repl)
-                                  ("\*sly-mrepl" . cl-repl)))
+  (purpose-mode-user-purposes '((rustic-mode . rust-1)
+                                (rustic-compilation-mode . rust-3)))
   :config
   (purpose-compile-user-configuration))
 
@@ -230,3 +207,9 @@
       (load full-name))))
 
 (load-local-file "init.el")
+
+(add-to-list 'purpose-user-mode-purposes '(rustic-mode . rust-1))
+(add-to-list 'purpose-user-mode-purposes '(rustic-compilation-mode . rust-3))
+(require 'window-purpose-x)
+(purpose-compile-user-configuration)
+;; (purpose-mode)
