@@ -213,3 +213,21 @@
 (require 'window-purpose-x)
 (purpose-compile-user-configuration)
 ;; (purpose-mode)
+
+;; Stolen from coldnew/linux-kernel-coding-style.el on github, installing the package doesn't work?
+(defun linux-kernel-coding-style/setup ()
+  (let ((filename (buffer-file-name)))
+    ;; Enable kernel mode for the appropriate files
+    (when (and filename
+	       (or (locate-dominating-file filename "Kbuild")
+		   (locate-dominating-file filename "Kconfig")
+		   (save-excursion (goto-char 0)
+				   (search-forward-regexp "^#include <linux/\\(module\\|kernel\\)\\.h>$" nil t))))
+      (setq indent-tabs-mode t)
+      (setq tab-width 8)
+      (setq c-basic-offset 8)
+      (c-set-style "linux-kernel")
+      (message "Setting up indentation for the linux kernel"))))
+
+(use-package cc-mode
+  :hook (c-mode . linux-kernel-coding-style/setup))

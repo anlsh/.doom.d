@@ -62,3 +62,12 @@
 (package! protobuf-mode)
 (package! ws-butler)
 (package! window-purpose)
+
+;; Broken?
+;; (package! linux-kernel-coding-style
+;;   :recipe (:type git :host github :repo "coldnew/linux-kernel-coding-style.el"))
+
+;; dtrt-indent doesn't play nice with c-basic-offset. dtrt-indent-try-set-offset ends up overwriting
+;; the c-basic-offset of 8 I use for linux kernel stuff.
+;; Thanks M-x debug-on-variable-change!
+(package! dtrt-indent :disable t)
