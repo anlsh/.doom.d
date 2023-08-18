@@ -231,3 +231,11 @@
 
 (use-package cc-mode
   :hook (c-mode . linux-kernel-coding-style/setup))
+
+(use-package whitespace
+  :custom
+  (whitespace-style '(face indentation tab-mark trailing))
+  (show-trailing-whitespace t)
+  ;; Turn on global-whitespace-mode, otherwise doom-highlight-non-default-indentation-h sets its own
+  ;; whitespace configuration for some reason.
+  :config (global-whitespace-mode +1))
