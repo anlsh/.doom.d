@@ -2,6 +2,10 @@
 
 (setq doom-localleader-key ",")
 
+(map! :map global-map
+      "C-<right>" #'next-buffer
+      "C-<left>" #'previous-buffer)
+
 (map! :leader
       :desc "M-x" "SPC" #'counsel-M-x
       :desc "Find file in project" ":" #'+ivy/projectile-find-file)
