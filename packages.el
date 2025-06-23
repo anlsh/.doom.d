@@ -46,13 +46,6 @@
 ;; our package manager can't deal with; see raxod502/straight.el#279)
 ;(package! builtin-package :recipe (:branch "develop"))
 
-(package! window-purpose
-  :recipe (:type git :host github :repo "bmag/emacs-purpose"))
-
-;; TODO The git repo is now located @ https://depp.brause.cc/shackle/
-(package! shackle
-  :recipe (:type git :host github :repo "wasamasa/shackle"))
-
 (package! iedit)
 (package! aggressive-indent)
 
@@ -61,11 +54,6 @@
 (package! hungry-delete)
 (package! protobuf-mode)
 (package! ws-butler)
-(package! window-purpose)
-
-;; Broken?
-;; (package! linux-kernel-coding-style
-;;   :recipe (:type git :host github :repo "coldnew/linux-kernel-coding-style.el"))
 
 ;; dtrt-indent doesn't play nice with c-basic-offset. dtrt-indent-try-set-offset ends up overwriting
 ;; the c-basic-offset of 8 I use for linux kernel stuff.

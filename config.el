@@ -123,8 +123,7 @@
 (use-package lsp-clangd
   :custom
   (lsp-clients-clangd-args
-   '("-j=4"
-     "--background-index"
+   '("--background-index"
      "--clang-tidy"
      "--completion-style=detailed"
      "--header-insertion=never"
@@ -146,12 +145,6 @@
 (use-package python
   :custom
   (python-indent-offset 4))
-
-(use-package shackle
-  :custom (shackle-rules
-           '((shell-mode :same t :inhibit-window-quit t)))
-  :config
-  (shackle-mode))
 
 (use-package sly
   :custom
@@ -175,21 +168,18 @@
 (use-package smartparens
   :hook (lispy-mode . turn-on-smartparens-strict-mode))
 
-(use-package vterm
-  :hook (vterm-mode . (lambda () (setq show-trailing-whitespace nil))))
-
 (use-package ws-butler
   :config (ws-butler-global-mode))
 
 
-(use-package! window-purpose
-  :custom
-  (purpose-layout-dirs '("~/.doom.d/layouts/"))
-  ;; Although the package suggests using add-to-list, default value is nil
-  (purpose-mode-user-purposes '((rustic-mode . rust-1)
-                                (rustic-compilation-mode . rust-3)))
-  :config
-  (purpose-compile-user-configuration))
+; (use-package! window-purpose
+;   :custom
+;   (purpose-layout-dirs '("~/.doom.d/layouts/"))
+;   ;; Although the package suggests using add-to-list, default value is nil
+;   (purpose-mode-user-purposes '((rustic-mode . rust-1)
+;                                 (rustic-compilation-mode . rust-3)))
+;   :config
+;   (purpose-compile-user-configuration))
 
 (use-package yasnippet
   :custom (yas-snippet-dirs '("~/.doom.d/snippets/")))
@@ -207,12 +197,6 @@
       (load full-name))))
 
 (load-local-file "init.el")
-
-(add-to-list 'purpose-user-mode-purposes '(rustic-mode . rust-1))
-(add-to-list 'purpose-user-mode-purposes '(rustic-compilation-mode . rust-3))
-(require 'window-purpose-x)
-(purpose-compile-user-configuration)
-;; (purpose-mode)
 
 ;; Stolen from coldnew/linux-kernel-coding-style.el on github, installing the package doesn't work?
 (defun linux-kernel-coding-style/setup ()
